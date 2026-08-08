@@ -15,7 +15,7 @@ public class BillCalculator
 
         if (units <= 50)
         {
-            bill = units * 4;
+            bill = units * 5;
         }
         else if (units <= 100)
         {
