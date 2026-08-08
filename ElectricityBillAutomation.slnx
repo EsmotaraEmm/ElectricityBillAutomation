@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ElectricityBillCalculator.Tests/ElectricityBillCalculator.Tests.csproj" />
+  <Project Path="ElectricityBillCalculator/ElectricityBillCalculator.csproj" />
+</Solution>
