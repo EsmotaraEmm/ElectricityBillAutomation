@@ -2,8 +2,8 @@
 
 public class BillCalculator
 {
-public decimal CalculateBill(int units)
-{
+    public decimal CalculateBill(int units)
+    {
         if (units < 0)
         {
             throw new ArgumentException(
