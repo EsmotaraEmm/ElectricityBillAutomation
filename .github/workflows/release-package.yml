@@ -1,0 +1,41 @@
+name: Release Package
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run automated tests
+        run: dotnet test --configuration Release --no-build
+
+      - name: Publish application
+        run: dotnet publish ElectricityBillCalculator/ElectricityBillCalculator.csproj --configuration Release --output published
+
+      - name: Create release package
+        run: |
+          tar -czf electricity-bill-calculator-${{ github.ref_name }}.tar.gz -C published .
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: electricity-bill-calculator-${{ github.ref_name }}
+          path: electricity-bill-calculator-${{ github.ref_name }}.tar.gz
